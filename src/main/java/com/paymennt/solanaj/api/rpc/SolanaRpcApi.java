@@ -395,4 +395,19 @@ public class SolanaRpcApi {
         return client.call("getBlocksWithLimit", params, BlockNumbers.class);
     }
 
+    public SolanaBlock getBlock(long slot) {
+        List<Object> params = new ArrayList<>();
+
+        params.add(slot);
+        params.add("{\n" +
+                "        \"encoding\": \"jsonParsed\",\n" +
+                "        \"maxSupportedTransactionVersion\":0,\n" +
+                "        \"transactionDetails\":\"accounts\",\n" +
+                "        \"rewards\":false\n" +
+                "      }");
+
+        return client.call("getBlock", params, SolanaBlock.class);
+    }
+
+
 }
