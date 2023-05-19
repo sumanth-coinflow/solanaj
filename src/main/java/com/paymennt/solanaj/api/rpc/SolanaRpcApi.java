@@ -386,13 +386,13 @@ public class SolanaRpcApi {
     }
 
 
-    public BlockNumbers getBlocks(long start, long end) {
+    public BlockNumbers getBlocks(long start, long limit) {
         List<Object> params = new ArrayList<>();
 
         params.add(start);
-        params.add(end);
+        params.add(limit);
 
-        return client.call("getBlocks", params, BlockNumbers.class);
+        return client.call("getBlocksWithLimit", params, BlockNumbers.class);
     }
 
 }
