@@ -18,7 +18,7 @@ public class SolanaBlock extends RpcResultObject {
     private String blockhash;
     private Long parentSlot;
     private String previousBlockhash;
-    private List<SolanaTransaction> transactions;
+    private List<ConfirmedTransaction> transactions;
 
     public Long getBlockHeight() {
         return blockHeight;
@@ -60,11 +60,11 @@ public class SolanaBlock extends RpcResultObject {
         this.previousBlockhash = previousBlockhash;
     }
 
-    public List<SolanaTransaction> getTransactions() {
+    public List<ConfirmedTransaction> getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(List<SolanaTransaction> transactions) {
+    public void setTransactions(List<ConfirmedTransaction> transactions) {
         this.transactions = transactions;
     }
 }
