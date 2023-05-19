@@ -1,13 +1,8 @@
 /************************************************************************ 
  * Copyright PointCheckout, Ltd.
- * 
+ *
  */
 package com.paymennt.solanaj.api.rpc;
-
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
 
 import com.paymennt.solanaj.api.rpc.types.*;
 import com.paymennt.solanaj.api.rpc.types.ConfigObjects.Filter;
@@ -23,37 +18,38 @@ import com.paymennt.solanaj.data.SolanaTransaction;
 import com.paymennt.solanaj.exception.SolanajException;
 import com.paymennt.solanaj.program.TokenProgram;
 
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+
 /**
- * 
+ *
  */
 public class SolanaRpcApi {
 
-    /**  */
+    /**
+     *
+     */
     private SolanaRpcClient client;
 
     /**
-     * 
-     *
-     * @param client 
+     * @param client
      */
     public SolanaRpcApi(SolanaRpcClient client) {
         this.client = client;
     }
 
     /**
-     * 
-     *
-     * @return 
+     * @return
      */
     public String getRecentBlockhash() {
         return client.call("getRecentBlockhash", null, RecentBlockhash.class).getRecentBlockhash();
     }
 
     /**
-     * 
-     *
-     * @param transaction 
-     * @return 
+     * @param transaction
+     * @return
      */
     public String sendTransaction(SolanaTransaction transaction) {
         byte[] serializedTransaction = transaction.serialize();
@@ -69,14 +65,12 @@ public class SolanaRpcApi {
     }
 
     /**
-     * 
-     *
-     * @param mint 
-     * @param feepayer 
-     * @param sender 
-     * @param recipient 
-     * @param amount 
-     * @return 
+     * @param mint
+     * @param feepayer
+     * @param sender
+     * @param recipient
+     * @param amount
+     * @return
      */
     public String signAndSendTokenTransaction(
             String mint,
@@ -140,10 +134,8 @@ public class SolanaRpcApi {
     }
 
     /**
-     * 
-     *
-     * @param address 
-     * @return 
+     * @param address
+     * @return
      */
     public long getBalance(String address) {
         List<Object> params = new ArrayList<>();
@@ -152,10 +144,8 @@ public class SolanaRpcApi {
     }
 
     /**
-     * 
-     *
-     * @param address 
-     * @return 
+     * @param address
+     * @return
      */
     public long getTokenAccountBalance(String address) {
         List<Object> params = new ArrayList<>();
@@ -164,10 +154,8 @@ public class SolanaRpcApi {
     }
 
     /**
-     * 
-     *
-     * @param signature 
-     * @return 
+     * @param signature
+     * @return
      */
     public ConfirmedTransaction getTransaction(String signature) {
         List<Object> params = new ArrayList<>();
@@ -179,10 +167,8 @@ public class SolanaRpcApi {
     }
 
     /**
-     * 
-     *
-     * @param signatures 
-     * @return 
+     * @param signatures
+     * @return
      */
     public List<ConfirmedTransaction> getTransactions(List<String> signatures) {
 
@@ -199,13 +185,11 @@ public class SolanaRpcApi {
     }
 
     /**
-     * 
-     *
-     * @param key 
-     * @param limit 
-     * @return 
+     * @param key
+     * @param limit
+     * @return
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public List<SignatureInformation> getSignaturesForAddress(String key, int limit) {
         List<Object> params = new ArrayList<>();
 
@@ -223,12 +207,10 @@ public class SolanaRpcApi {
     }
 
     /**
-     * 
-     *
-     * @param account 
-     * @param offset 
-     * @param bytes 
-     * @return 
+     * @param account
+     * @param offset
+     * @param bytes
+     * @return
      */
     public List<ProgramAccount> getProgramAccounts(SolanaPublicKey account, long offset, String bytes) {
         List<Object> filters = new ArrayList<>();
@@ -239,23 +221,19 @@ public class SolanaRpcApi {
     }
 
     /**
-     * 
-     *
-     * @param account 
-     * @return 
+     * @param account
+     * @return
      */
     public List<ProgramAccount> getProgramAccounts(SolanaPublicKey account) {
         return getProgramAccounts(account, new ProgramAccountConfig(Encoding.base64));
     }
 
     /**
-     * 
-     *
-     * @param account 
-     * @param programAccountConfig 
-     * @return 
+     * @param account
+     * @param programAccountConfig
+     * @return
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public List<ProgramAccount> getProgramAccounts(SolanaPublicKey account, ProgramAccountConfig programAccountConfig) {
         List<Object> params = new ArrayList<>();
 
@@ -276,10 +254,8 @@ public class SolanaRpcApi {
     }
 
     /**
-     * 
-     *
-     * @param address 
-     * @return 
+     * @param address
+     * @return
      */
     public AccountInfo getAccountInfo(String address) {
         List<Object> params = new ArrayList<>();
@@ -291,10 +267,8 @@ public class SolanaRpcApi {
     }
 
     /**
-     * 
-     *
-     * @param dataLength 
-     * @return 
+     * @param dataLength
+     * @return
      */
     public long getMinimumBalanceForRentExemption(long dataLength) {
         List<Object> params = new ArrayList<>();
@@ -305,10 +279,8 @@ public class SolanaRpcApi {
     }
 
     /**
-     * 
-     *
-     * @param block 
-     * @return 
+     * @param block
+     * @return
      */
     public long getBlockTime(long block) {
         List<Object> params = new ArrayList<>();
@@ -319,11 +291,9 @@ public class SolanaRpcApi {
     }
 
     /**
-     * 
-     *
-     * @param address 
-     * @param lamports 
-     * @return 
+     * @param address
+     * @param lamports
+     * @return
      */
     public String requestAirdrop(SolanaPublicKey address, long lamports) {
         List<Object> params = new ArrayList<>();
@@ -335,11 +305,9 @@ public class SolanaRpcApi {
     }
 
     /**
-     * 
-     *
-     * @param owner 
-     * @param mint 
-     * @return 
+     * @param owner
+     * @param mint
+     * @return
      */
     public RpcTokenAccount getTokenAccount(String owner, String mint) {
         List<Object> params = new ArrayList<>();
@@ -352,10 +320,8 @@ public class SolanaRpcApi {
     }
 
     /**
-     * 
-     *
-     * @param message 
-     * @return 
+     * @param message
+     * @return
      */
     public RpcFeesResult getFees(SolanaMessage message) {
         message.setRecentBlockhash(getRecentBlockhash());
@@ -372,10 +338,8 @@ public class SolanaRpcApi {
     }
 
     /**
-     * 
-     *
-     * @param signatures 
-     * @return 
+     * @param signatures
+     * @return
      */
     public RpcSignitureStatusResult getSignatureStatuses(List<String> signatures) {
         List<Object> params = new ArrayList<>();
@@ -399,13 +363,7 @@ public class SolanaRpcApi {
         List<Object> params = new ArrayList<>();
 
         params.add(slot);
-        params.add("{\n" +
-                "        \"encoding\": \"jsonParsed\",\n" +
-                "        \"maxSupportedTransactionVersion\":0,\n" +
-                "        \"transactionDetails\":\"accounts\",\n" +
-                "        \"rewards\":false\n" +
-                "      }");
-
+        params.add(new RpcTransactionConfig(SolanaCommitment.finalized, "jsonParsed", "0", "accounts", "false"));
         return client.call("getBlock", params, SolanaBlock.class);
     }
 
