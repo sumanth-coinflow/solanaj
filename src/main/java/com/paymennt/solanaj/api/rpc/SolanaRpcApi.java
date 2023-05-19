@@ -386,7 +386,7 @@ public class SolanaRpcApi {
     }
 
 
-    public List<String> getBlocks(long start, long limit) {
+    public List<Integer> getBlocks(long start, long limit) {
         List<Object> params = new ArrayList<>();
 
         params.add(start);
