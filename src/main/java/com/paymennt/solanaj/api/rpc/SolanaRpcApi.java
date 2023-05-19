@@ -9,26 +9,13 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-import com.paymennt.solanaj.api.rpc.types.AccountInfo;
+import com.paymennt.solanaj.api.rpc.types.*;
 import com.paymennt.solanaj.api.rpc.types.ConfigObjects.Filter;
 import com.paymennt.solanaj.api.rpc.types.ConfigObjects.Memcmp;
 import com.paymennt.solanaj.api.rpc.types.ConfigObjects.ProgramAccountConfig;
 import com.paymennt.solanaj.api.rpc.types.ConfigObjects.SignaturesForAddress;
-import com.paymennt.solanaj.api.rpc.types.ConfirmedTransaction;
-import com.paymennt.solanaj.api.rpc.types.ProgramAccount;
-import com.paymennt.solanaj.api.rpc.types.RecentBlockhash;
-import com.paymennt.solanaj.api.rpc.types.RpcConfig;
-import com.paymennt.solanaj.api.rpc.types.RpcFeesResult;
 import com.paymennt.solanaj.api.rpc.types.RpcResultTypes.ValueLong;
-import com.paymennt.solanaj.api.rpc.types.RpcSendTransactionConfig;
 import com.paymennt.solanaj.api.rpc.types.RpcSendTransactionConfig.Encoding;
-import com.paymennt.solanaj.api.rpc.types.RpcSignitureStatusResult;
-import com.paymennt.solanaj.api.rpc.types.RpcStatusConfig;
-import com.paymennt.solanaj.api.rpc.types.RpcTokenAccount;
-import com.paymennt.solanaj.api.rpc.types.RpcTokenAccountConfig;
-import com.paymennt.solanaj.api.rpc.types.RpcTokenBalance;
-import com.paymennt.solanaj.api.rpc.types.SignatureInformation;
-import com.paymennt.solanaj.api.rpc.types.SolanaCommitment;
 import com.paymennt.solanaj.data.SolanaAccount;
 import com.paymennt.solanaj.data.SolanaMessage;
 import com.paymennt.solanaj.data.SolanaPublicKey;
@@ -396,6 +383,16 @@ public class SolanaRpcApi {
         params.add(new RpcStatusConfig());
 
         return client.call("getSignatureStatuses", params, RpcSignitureStatusResult.class);
+    }
+
+
+    public BlockNumbers getBlocks(long start, long end) {
+        List<Object> params = new ArrayList<>();
+
+        params.add(start);
+        params.add(end);
+
+        return client.call("getBlocks", params, BlockNumbers.class);
     }
 
 }
