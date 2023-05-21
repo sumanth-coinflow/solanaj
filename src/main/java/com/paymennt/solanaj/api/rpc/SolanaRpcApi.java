@@ -11,6 +11,7 @@ import com.paymennt.solanaj.api.rpc.types.ConfigObjects.ProgramAccountConfig;
 import com.paymennt.solanaj.api.rpc.types.ConfigObjects.SignaturesForAddress;
 import com.paymennt.solanaj.api.rpc.types.RpcResultTypes.ValueLong;
 import com.paymennt.solanaj.api.rpc.types.RpcSendTransactionConfig.Encoding;
+import com.paymennt.solanaj.block.Block;
 import com.paymennt.solanaj.data.SolanaAccount;
 import com.paymennt.solanaj.data.SolanaMessage;
 import com.paymennt.solanaj.data.SolanaPublicKey;
@@ -359,12 +360,12 @@ public class SolanaRpcApi {
         return client.call("getBlocksWithLimit", params, List.class);
     }
 
-    public SolanaBlock getBlock(long slot) {
+    public Block getBlock(long slot) {
         List<Object> params = new ArrayList<>();
 
         params.add(slot);
         params.add(new RpcTransactionConfig(SolanaCommitment.finalized, "jsonParsed", "0", "full", "false"));
-        return client.call("getBlock", params, SolanaBlock.class);
+        return client.call("getBlock", params, Block.class);
     }
 
 
