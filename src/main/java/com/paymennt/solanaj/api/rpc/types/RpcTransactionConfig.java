@@ -4,9 +4,11 @@
  */
 package com.paymennt.solanaj.api.rpc.types;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class RpcTransactionConfig {
     private SolanaCommitment commitment;
     private String encoding;
