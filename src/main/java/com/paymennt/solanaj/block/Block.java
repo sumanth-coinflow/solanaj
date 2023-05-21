@@ -6,7 +6,6 @@ package com.paymennt.solanaj.block;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.paymennt.solanaj.api.rpc.types.ConfirmedTransaction;
 import com.paymennt.solanaj.api.rpc.types.RpcResultObject;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,5 +22,5 @@ public class Block extends RpcResultObject {
     private String blockhash;
     private Long parentSlot;
     private String previousBlockhash;
-    private List<Transaction> transactions;
+    private List<FullTransaction> transactions;
 }
