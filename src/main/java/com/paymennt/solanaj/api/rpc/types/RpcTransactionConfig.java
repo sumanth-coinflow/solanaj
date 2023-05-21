@@ -14,5 +14,5 @@ public class RpcTransactionConfig {
     private String encoding;
     private Integer maxSupportedTransactionVersion;
     private String transactionDetails;
-    private String rewards;
+    private boolean rewards;
 }
