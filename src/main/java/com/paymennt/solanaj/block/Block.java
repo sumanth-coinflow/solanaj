@@ -23,5 +23,5 @@ public class Block extends RpcResultObject {
     private String blockhash;
     private Long parentSlot;
     private String previousBlockhash;
-    private List<ConfirmedTransaction> transactions;
+    private List<Transaction> transactions;
 }
