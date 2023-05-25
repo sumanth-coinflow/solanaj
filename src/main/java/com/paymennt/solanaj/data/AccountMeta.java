@@ -123,7 +123,7 @@ public class AccountMeta {
     @Override
     public String toString() {
         return "AccountMeta{" +
-                "publicKey=" + publicKey +
+                "publicKey= " + publicKey +
                 ", isSigner=" + isSigner +
                 ", isWritable=" + isWritable +
                 '}';
