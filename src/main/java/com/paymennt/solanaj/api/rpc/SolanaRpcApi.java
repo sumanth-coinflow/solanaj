@@ -360,11 +360,11 @@ public class SolanaRpcApi {
         return client.call("getBlocksWithLimit", params, List.class);
     }
 
-    public Block getBlock(long slot) {
+    public Block getBlock(long slot,RpcTransactionConfig config) {
         List<Object> params = new ArrayList<>();
 
         params.add(slot);
-        params.add(new RpcTransactionConfig(SolanaCommitment.finalized, "jsonParsed", 0, "accounts", false));
+        params.add(config);
         return client.call("getBlock", params, Block.class);
     }
 
