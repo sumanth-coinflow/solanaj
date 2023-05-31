@@ -12,6 +12,7 @@ import com.paymennt.solanaj.api.rpc.types.ConfigObjects.SignaturesForAddress;
 import com.paymennt.solanaj.api.rpc.types.RpcResultTypes.ValueLong;
 import com.paymennt.solanaj.api.rpc.types.RpcSendTransactionConfig.Encoding;
 import com.paymennt.solanaj.block.Block;
+import com.paymennt.solanaj.block.FilteredBlock;
 import com.paymennt.solanaj.data.SolanaAccount;
 import com.paymennt.solanaj.data.SolanaMessage;
 import com.paymennt.solanaj.data.SolanaPublicKey;
@@ -360,13 +361,27 @@ public class SolanaRpcApi {
         return client.call("getBlocksWithLimit", params, List.class);
     }
 
-    public Block getBlock(long slot,RpcTransactionConfig config) {
+    public FilteredBlock getFilteredBlock(long slot) {
         List<Object> params = new ArrayList<>();
 
         params.add(slot);
-        params.add(config);
+        params.add(new RpcTransactionConfig(SolanaCommitment.finalized, "jsonParsed", 0, "accounts", false));
+        return client.call("getBlock", params, FilteredBlock.class);
+    }
+
+    public Block getBlock(long slot) {
+        List<Object> params = new ArrayList<>();
+
+        params.add(slot);
+        params.add(new RpcTransactionConfig(SolanaCommitment.finalized, "jsonParsed", 0, "full", false));
         return client.call("getBlock", params, Block.class);
     }
 
+    public LatestBlockhash getLatestBlockhash() {
+        List<Object> params = new ArrayList<>();
+
+        params.add(new RpcLogsConfig(SolanaCommitment.confirmed));
+        return client.call("getLatestBlockhash", params, LatestBlockhash.class);
+    }
 
 }

@@ -16,11 +16,11 @@ import java.util.List;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
-public class Block extends RpcResultObject {
+public class FilteredBlock extends RpcResultObject {
     private Long blockHeight;
     private Instant blockTime;
     private String blockhash;
     private Long parentSlot;
     private String previousBlockhash;
-    private List<TransactionData> transactions;
+    private List<FilteredTransactionData> transactions;
 }

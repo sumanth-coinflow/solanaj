@@ -12,8 +12,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Message {
     private List<AccountMeta> accountKeys;
-    private Header header;
-    private List<Instruction> instructions;
+    private Object addressTableLookups;
+    private List<ParsedInstruction> instructions;
     private String recentBlockhash;
-
 }
