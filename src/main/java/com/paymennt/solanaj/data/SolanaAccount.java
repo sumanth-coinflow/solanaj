@@ -1,6 +1,6 @@
 /************************************************************************ 
  * Copyright PointCheckout, Ltd.
- * 
+ *
  */
 package com.paymennt.solanaj.data;
 
@@ -8,43 +8,47 @@ import com.paymennt.crypto.bip32.wallet.key.HdPrivateKey;
 import com.paymennt.solanaj.utils.TweetNaclFast;
 
 /**
- * 
+ *
  */
 public class SolanaAccount {
-    
-    /**  */
-    private TweetNaclFast.Signature.KeyPair keyPair;
 
     /**
-     * 
+     *
+     */
+    private TweetNaclFast.Signature.KeyPair keyPair;
+
+    private int account;
+
+    /**
+     *
      */
     public SolanaAccount() {
         this.keyPair = TweetNaclFast.Signature.keyPair();
     }
 
     /**
-     * 
-     *
-     * @param keyPair 
+     * @param keyPair
      */
     public SolanaAccount(TweetNaclFast.Signature.KeyPair keyPair) {
         this.keyPair = keyPair;
     }
 
     /**
-     * 
-     *
-     * @param privateKey 
+     * @param privateKey
      */
     public SolanaAccount(HdPrivateKey privateKey) {
         this.keyPair = TweetNaclFast.Signature.keyPair_fromSeed(privateKey.getPrivateKey());
     }
 
+    public SolanaAccount(HdPrivateKey privateKey, int account) {
+        this.keyPair = TweetNaclFast.Signature.keyPair_fromSeed(privateKey.getPrivateKey());
+        this.account = account;
+    }
+
+
     /**
-     * 
-     *
-     * @param secretKey 
-     * @return 
+     * @param secretKey
+     * @return
      */
     public static SolanaAccount fromSecret(byte[] secretKey) {
         TweetNaclFast.Signature.KeyPair keyPair = TweetNaclFast.Signature.keyPair_fromSecretKey(secretKey);
@@ -52,10 +56,8 @@ public class SolanaAccount {
     }
 
     /**
-     * 
-     *
-     * @param seed 
-     * @return 
+     * @param seed
+     * @return
      */
     public static SolanaAccount fromSeed(byte[] seed) {
         TweetNaclFast.Signature.KeyPair keyPair = TweetNaclFast.Signature.keyPair_fromSeed(seed);
@@ -63,18 +65,14 @@ public class SolanaAccount {
     }
 
     /**
-     * 
-     *
-     * @return 
+     * @return
      */
     public SolanaPublicKey getPublicKey() {
         return new SolanaPublicKey(keyPair.getPublicKey());
     }
 
     /**
-     * 
-     *
-     * @return 
+     * @return
      */
     public byte[] getSecretKey() {
         return keyPair.getSecretKey();
