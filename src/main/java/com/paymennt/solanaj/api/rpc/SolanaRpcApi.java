@@ -13,6 +13,7 @@ import com.paymennt.solanaj.api.rpc.types.RpcResultTypes.ValueLong;
 import com.paymennt.solanaj.api.rpc.types.RpcSendTransactionConfig.Encoding;
 import com.paymennt.solanaj.block.Block;
 import com.paymennt.solanaj.block.FilteredBlock;
+import com.paymennt.solanaj.block.TransactionData;
 import com.paymennt.solanaj.data.SolanaAccount;
 import com.paymennt.solanaj.data.SolanaMessage;
 import com.paymennt.solanaj.data.SolanaPublicKey;
@@ -166,6 +167,19 @@ public class SolanaRpcApi {
         params.add(new RpcConfig(SolanaCommitment.confirmed, "jsonParsed"));
 
         return client.call("getTransaction", params, ConfirmedTransaction.class);
+    }
+
+    /**
+     * @param signature
+     * @return
+     */
+    public TransactionData getTransactionData(String signature) {
+        List<Object> params = new ArrayList<>();
+
+        params.add(signature);
+        params.add(new RpcConfig(SolanaCommitment.confirmed, "jsonParsed"));
+
+        return client.call("getTransaction", params, TransactionData.class);
     }
 
     /**
