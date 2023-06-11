@@ -78,4 +78,7 @@ public class SolanaAccount {
         return keyPair.getSecretKey();
     }
 
+    public int getAccount() {
+        return account;
+    }
 }
