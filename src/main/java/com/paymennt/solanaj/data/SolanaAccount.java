@@ -81,4 +81,8 @@ public class SolanaAccount {
     public Integer getAccount() {
         return account;
     }
+
+    public TweetNaclFast.Signature.KeyPair getKeyPair() {
+        return keyPair;
+    }
 }
