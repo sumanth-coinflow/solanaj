@@ -33,6 +33,11 @@ public class SolanaAccount {
         this.keyPair = keyPair;
     }
 
+    public SolanaAccount(TweetNaclFast.Signature.KeyPair keyPair, Integer account) {
+        this.keyPair = keyPair;
+        this.account = account;
+    }
+
     /**
      * @param privateKey
      */
@@ -40,7 +45,7 @@ public class SolanaAccount {
         this.keyPair = TweetNaclFast.Signature.keyPair_fromSeed(privateKey.getPrivateKey());
     }
 
-    public SolanaAccount(HdPrivateKey privateKey, int account) {
+    public SolanaAccount(HdPrivateKey privateKey, Integer account) {
         this.keyPair = TweetNaclFast.Signature.keyPair_fromSeed(privateKey.getPrivateKey());
         this.account = account;
     }
