@@ -17,7 +17,7 @@ public class SolanaAccount {
      */
     private TweetNaclFast.Signature.KeyPair keyPair;
 
-    private int account;
+    private Integer account;
 
     /**
      *
@@ -78,7 +78,7 @@ public class SolanaAccount {
         return keyPair.getSecretKey();
     }
 
-    public int getAccount() {
+    public Integer getAccount() {
         return account;
     }
 }
