@@ -14,21 +14,8 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RpcTokenAccounts extends RpcResultObject {
 
-    private Value result;
-
-    public Value getResult() {
-        return result;
-    }
-
-    public void setResult(Value result) {
-        this.result = result;
-    }
-
-    @NoArgsConstructor
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Value {
-        private List<TokenAccount> value;
-    }
+    @JsonProperty("value")
+    private List<TokenAccount> accounts;
 
     @NoArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
