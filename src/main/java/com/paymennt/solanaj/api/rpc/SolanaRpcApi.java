@@ -21,8 +21,10 @@ import com.paymennt.solanaj.data.SolanaTransaction;
 import com.paymennt.solanaj.exception.SolanajException;
 import com.paymennt.solanaj.program.TokenProgram;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
 
 /**
  *
@@ -399,7 +401,7 @@ public class SolanaRpcApi {
     public RpcTokenAccounts getTokenAccountsByOwner(String address) {
         List<Object> params = new ArrayList<>();
         params.add(address);
-        params.add(Map.of("programId",TokenProgram.PROGRAM_ID));
+        params.add(new RpcTokenConfig(TokenProgram.PROGRAM_ID.toString()));
         params.add(new RpcConfig(SolanaCommitment.finalized, "jsonParsed"));
         return client.call("getTokenAccountsByOwner", params, RpcTokenAccounts.class);
     }
