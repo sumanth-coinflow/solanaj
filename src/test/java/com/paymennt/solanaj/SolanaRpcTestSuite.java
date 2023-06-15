@@ -37,7 +37,7 @@ public class SolanaRpcTestSuite {
     @BeforeClass
     public static void init() {
         Security.addProvider(new BouncyCastleProvider());
-        client = new SolanaRpcClient(cluster);
+        client = new SolanaRpcClient(com.paymennt.solanaj.Cluster.builder().url(cluster.getEndpoint()).build());
         randomWallet = new SolanaWallet(mnemonic, null, network);
         websocket = new SolanaWebSocketClient(cluster);
     }
