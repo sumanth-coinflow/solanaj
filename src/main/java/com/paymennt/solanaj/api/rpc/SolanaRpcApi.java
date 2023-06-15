@@ -410,7 +410,7 @@ public class SolanaRpcApi {
     public MultipleAccountInfo getMultipleAccounts(List<String> addresses, Long minContextSlot) {
         List<Object> params = new ArrayList<>();
         params.add(addresses.toArray());
-        params.add(RpcAccountsConfig.builder().commitment(SolanaCommitment.finalized).encoding("jsonParsed").minContextSlot(minContextSlot).build());
+        params.add(RpcAccountsConfig.builder().commitment(SolanaCommitment.finalized).encoding("jsonParsed").build());
         return client.call("getMultipleAccounts", params, MultipleAccountInfo.class);
     }
 

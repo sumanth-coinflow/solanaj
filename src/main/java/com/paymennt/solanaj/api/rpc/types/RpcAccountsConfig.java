@@ -14,8 +14,6 @@ public class RpcAccountsConfig {
 
     private SolanaCommitment commitment;
 
-    private Long minContextSlot;
-
     private String encoding;
 
 }
