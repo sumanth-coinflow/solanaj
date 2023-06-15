@@ -398,7 +398,7 @@ public class SolanaRpcApi {
         return client.call("getLatestBlockhash", params, LatestBlockhash.class);
     }
 
-    public RpcTokenAccount getTokenAccountsByOwner(String address,) {
+    public RpcTokenAccount getTokenAccountsByOwner(String address) {
         List<Object> params = new ArrayList<>();
         params.add(address);
         params.add(new RpcConfig(null, "jsonParsed"));
