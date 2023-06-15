@@ -401,6 +401,7 @@ public class SolanaRpcApi {
     public RpcTokenAccounts getTokenAccountsByOwner(String address) {
         List<Object> params = new ArrayList<>();
         params.add(address);
+        params.add(null);
         params.add(new RpcConfig(SolanaCommitment.finalized, "jsonParsed"));
         return client.call("getTokenAccountsByOwner", params, RpcTokenAccounts.class);
     }
