@@ -11,6 +11,7 @@ import com.paymennt.solanaj.api.rpc.types.ConfigObjects.ProgramAccountConfig;
 import com.paymennt.solanaj.api.rpc.types.ConfigObjects.SignaturesForAddress;
 import com.paymennt.solanaj.api.rpc.types.RpcResultTypes.ValueLong;
 import com.paymennt.solanaj.api.rpc.types.RpcSendTransactionConfig.Encoding;
+import com.paymennt.solanaj.api.rpc.types.multipleaccountinfo.MultipleAccountInfo;
 import com.paymennt.solanaj.block.Block;
 import com.paymennt.solanaj.block.FilteredBlock;
 import com.paymennt.solanaj.block.TransactionData;
@@ -405,4 +406,12 @@ public class SolanaRpcApi {
         params.add(new RpcConfig(SolanaCommitment.finalized, "jsonParsed"));
         return client.call("getTokenAccountsByOwner", params, RpcTokenAccounts.class);
     }
+
+    public MultipleAccountInfo getMultipleAccounts(List<String> addresses, Long minContextSlot) {
+        List<Object> params = new ArrayList<>();
+        params.add(addresses.toArray());
+        params.add(RpcAccountsConfig.builder().commitment(SolanaCommitment.finalized).encoding("jsonParsed").minContextSlot(minContextSlot).build());
+        return client.call("getMultipleAccounts", params, MultipleAccountInfo.class);
+    }
+
 }
