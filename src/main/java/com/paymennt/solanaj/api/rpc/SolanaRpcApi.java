@@ -407,7 +407,7 @@ public class SolanaRpcApi {
         return client.call("getTokenAccountsByOwner", params, RpcTokenAccounts.class);
     }
 
-    public MultipleAccountInfo getMultipleAccounts(List<String> addresses, Long minContextSlot) {
+    public MultipleAccountInfo getMultipleAccounts(List<String> addresses) {
         List<Object> params = new ArrayList<>();
         params.add(addresses.toArray());
         params.add(RpcAccountsConfig.builder().commitment(SolanaCommitment.finalized).encoding("jsonParsed").build());
