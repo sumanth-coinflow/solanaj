@@ -13,5 +13,5 @@ import java.util.List;
 @Getter
 public class MultipleAccountInfo extends RpcResultObject {
     @JsonProperty("value")
-    private List<AccountInfo> value;
+    private List<AccountInfo> accounts;
 }
