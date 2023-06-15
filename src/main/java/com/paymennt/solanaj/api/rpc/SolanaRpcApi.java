@@ -25,6 +25,7 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -398,10 +399,11 @@ public class SolanaRpcApi {
         return client.call("getLatestBlockhash", params, LatestBlockhash.class);
     }
 
-    public RpcTokenAccounts getTokenAccountsByOwner(String address) {
+    public RpcTokenAccounts getTokenAccountsByOwner(String address, List<String> mints) {
         List<Object> params = new ArrayList<>();
         params.add(address);
-        params.add(null);
+        params.add(mints.stream()
+                .collect(Collectors.toMap(mint -> "mint", mint -> mint)));
         params.add(new RpcConfig(SolanaCommitment.finalized, "jsonParsed"));
         return client.call("getTokenAccountsByOwner", params, RpcTokenAccounts.class);
     }
