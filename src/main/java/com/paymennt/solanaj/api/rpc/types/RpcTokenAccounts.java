@@ -65,6 +65,7 @@ public class RpcTokenAccounts extends RpcResultObject {
 
     @NoArgsConstructor
     @JsonIgnoreProperties(ignoreUnknown = true)
+    @Getter
     public static class TokenAmount {
         @JsonProperty("amount")
         private String amount;
