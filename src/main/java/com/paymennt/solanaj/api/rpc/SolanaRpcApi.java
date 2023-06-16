@@ -22,10 +22,7 @@ import com.paymennt.solanaj.data.SolanaTransaction;
 import com.paymennt.solanaj.exception.SolanajException;
 import com.paymennt.solanaj.program.TokenProgram;
 
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -414,4 +411,30 @@ public class SolanaRpcApi {
         return client.call("getMultipleAccounts", params, MultipleAccountInfo.class);
     }
 
+
+    public TransactionData sendAndConfirmTransaction(SolanaTransaction transaction) throws InterruptedException {
+        byte[] serializedTransaction = transaction.serialize();
+
+        String base64Trx = Base64.getEncoder().encodeToString(serializedTransaction);
+
+        List<Object> params = new ArrayList<>();
+
+        params.add(base64Trx);
+        params.add(new RpcSendTransactionConfig());
+
+        String signature = client.call("sendTransaction", params, String.class);
+
+        int maxAttempts = 10;
+        int intervalMillis = 1000;
+        int attempt = 0;
+        while (attempt < maxAttempts) {
+            Thread.sleep(intervalMillis);
+            TransactionData transactionData = this.getTransactionData(signature);
+            if (Objects.nonNull(transactionData)) {
+                return transactionData;
+            }
+            attempt++;
+        }
+        throw new SolanajException("Transaction confirmation timed out");
+    }
 }
