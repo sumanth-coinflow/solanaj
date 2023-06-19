@@ -369,6 +369,7 @@ public class SolanaRpcApi {
 
         params.add(start);
         params.add(limit);
+        params.add(new RpcLogsConfig(SolanaCommitment.confirmed));
 
         return client.call("getBlocksWithLimit", params, List.class);
     }
@@ -377,7 +378,7 @@ public class SolanaRpcApi {
         List<Object> params = new ArrayList<>();
 
         params.add(slot);
-        params.add(new RpcTransactionConfig(SolanaCommitment.finalized, "jsonParsed", 0, "accounts", false));
+        params.add(new RpcTransactionConfig(SolanaCommitment.confirmed, "jsonParsed", 0, "accounts", false));
         return client.call("getBlock", params, FilteredBlock.class);
     }
 
@@ -385,7 +386,7 @@ public class SolanaRpcApi {
         List<Object> params = new ArrayList<>();
 
         params.add(slot);
-        params.add(new RpcTransactionConfig(SolanaCommitment.finalized, "jsonParsed", 0, "full", false));
+        params.add(new RpcTransactionConfig(SolanaCommitment.confirmed, "jsonParsed", 0, "full", false));
         return client.call("getBlock", params, Block.class);
     }
 
@@ -400,14 +401,14 @@ public class SolanaRpcApi {
         List<Object> params = new ArrayList<>();
         params.add(address);
         params.add(new RpcTokenConfig(TokenProgram.PROGRAM_ID.toString()));
-        params.add(new RpcConfig(SolanaCommitment.finalized, "jsonParsed"));
+        params.add(new RpcConfig(SolanaCommitment.confirmed, "jsonParsed"));
         return client.call("getTokenAccountsByOwner", params, RpcTokenAccounts.class);
     }
 
     public MultipleAccountInfo getMultipleAccounts(List<String> addresses) {
         List<Object> params = new ArrayList<>();
         params.add(addresses.toArray());
-        params.add(RpcAccountsConfig.builder().commitment(SolanaCommitment.finalized).encoding("jsonParsed").build());
+        params.add(RpcAccountsConfig.builder().commitment(SolanaCommitment.confirmed).encoding("jsonParsed").build());
         return client.call("getMultipleAccounts", params, MultipleAccountInfo.class);
     }
 
@@ -437,4 +438,13 @@ public class SolanaRpcApi {
         }
         throw new SolanajException("Transaction confirmation timed out");
     }
+
+    public Long getSlot() {
+        List<Object> params = new ArrayList<>();
+
+        params.add(new RpcLogsConfig(SolanaCommitment.confirmed));
+
+        return client.call("getSlot", params, Long.class);
+    }
+
 }
