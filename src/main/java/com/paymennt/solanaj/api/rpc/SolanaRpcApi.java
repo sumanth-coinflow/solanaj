@@ -386,7 +386,7 @@ public class SolanaRpcApi {
         List<Object> params = new ArrayList<>();
 
         params.add(slot);
-        params.add(new RpcTransactionConfig(SolanaCommitment.confirmed, "jsonParsed", 0, "full", false));
+        params.add(new RpcTransactionConfig(null, "jsonParsed", 0, "full", false));
         return client.call("getBlock", params, Block.class);
     }
 
