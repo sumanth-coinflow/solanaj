@@ -382,12 +382,12 @@ public class SolanaRpcApi {
         return client.call("getBlock", params, FilteredBlock.class);
     }
 
-    public Block getBlock(long slot) {
+    public String getBlock(long slot) {
         List<Object> params = new ArrayList<>();
 
         params.add(slot);
         params.add(new RpcTransactionConfig(SolanaCommitment.confirmed, "jsonParsed", 0, "full", false));
-        return client.call("getBlock", params, Block.class);
+        return client.call("getBlock", params, String.class);
     }
 
     public LatestBlockhash getLatestBlockhash() {
