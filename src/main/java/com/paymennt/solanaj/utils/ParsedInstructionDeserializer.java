@@ -22,7 +22,7 @@ public class ParsedInstructionDeserializer extends JsonDeserializer<ParsedInstru
         String programId = node.has("programId") ? node.get("programId").asText() : null;
         String program = node.has("program") ? node.get("program").asText() : null;
 
-        if (programId == null || program == null || !SystemProgram.PROGRAM_ID.toString().equalsIgnoreCase(programId) || !TokenProgram.PROGRAM_ID.toString().equalsIgnoreCase(programId) || !TokenProgram.ASSOCIATED_TOKEN_PROGRAM_ID.toString().equalsIgnoreCase(programId)) {
+        if (programId == null || program == null || (!SystemProgram.PROGRAM_ID.toString().equalsIgnoreCase(programId) && !TokenProgram.PROGRAM_ID.toString().equalsIgnoreCase(programId) && !TokenProgram.ASSOCIATED_TOKEN_PROGRAM_ID.toString().equalsIgnoreCase(programId))) {
             return null;
         }
 
