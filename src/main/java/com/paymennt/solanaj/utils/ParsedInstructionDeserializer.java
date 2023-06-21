@@ -19,10 +19,10 @@ public class ParsedInstructionDeserializer extends JsonDeserializer<ParsedInstru
             throws IOException {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
 
-        String programId = node.get("programId").asText();
-        String program = node.get("program").asText();
+        String programId = node.has("programId") ? node.get("programId").asText() : null;
+        String program = node.has("program") ? node.get("program").asText() : null;
 
-        if (!SystemProgram.PROGRAM_ID.toString().equalsIgnoreCase(programId) || !TokenProgram.PROGRAM_ID.toString().equalsIgnoreCase(programId) || !TokenProgram.ASSOCIATED_TOKEN_PROGRAM_ID.toString().equalsIgnoreCase(programId)) {
+        if (programId == null || program == null || !SystemProgram.PROGRAM_ID.toString().equalsIgnoreCase(programId) || !TokenProgram.PROGRAM_ID.toString().equalsIgnoreCase(programId) || !TokenProgram.ASSOCIATED_TOKEN_PROGRAM_ID.toString().equalsIgnoreCase(programId)) {
             return null;
         }
 
