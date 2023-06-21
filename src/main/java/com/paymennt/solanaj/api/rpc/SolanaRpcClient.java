@@ -84,8 +84,6 @@ public class SolanaRpcClient {
 
             String resultJson = JsonUtils.getObjectMapper().writeValueAsString(rpcResult.getResult());
 
-            if(rpcRequest.getMethod().equalsIgnoreCase("getBlock")) return (T) resultJson;
-
             return JsonUtils.decode(resultJson, clazz);
         } catch (IOException e) {
             throw new SolanajException(e.getMessage());

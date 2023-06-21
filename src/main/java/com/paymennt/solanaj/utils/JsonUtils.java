@@ -14,10 +14,12 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import com.paymennt.solanaj.block.ParsedInstruction;
 import com.paymennt.solanaj.exception.SolanajException;
 
 
@@ -32,6 +34,7 @@ public class JsonUtils {
             .addModule(new ParameterNamesModule())//
             .addModule(new Jdk8Module())//
             .addModule(new JavaTimeModule())//
+            .addModule(new SimpleModule().addDeserializer(ParsedInstruction.class,new ParsedInstructionDeserializer()))
             // other configuration modules
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .build();
