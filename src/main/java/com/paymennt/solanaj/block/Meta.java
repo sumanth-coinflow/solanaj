@@ -13,7 +13,7 @@ public class Meta {
     private int computeUnitsConsumed;
     private Object err;
     private long fee;
-    private List<Object> innerInstructions;
+    private List<ParsedInstruction> innerInstructions;
     private List<Long> postBalances;
     private List<Long> preBalances;
     private List<TokenBalance> postTokenBalances;
