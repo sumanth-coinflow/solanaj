@@ -1,6 +1,7 @@
 package com.paymennt.solanaj.block;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.paymennt.solanaj.api.rpc.types.TokenAccountData.TokenAmount;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,7 @@ public class ParsedInstructionInfo {
     private long amount;
     private String authority;
     private String source;
+    private String mint;
+    private TokenAmount tokenAmount;
 }
 
