@@ -39,16 +39,20 @@ public class ParsedInstructionDeserializer extends JsonDeserializer<ParsedInstru
                 String authority = infoNode.has("authority") ? infoNode.get("authority").asText() : null;
                 String source = infoNode.has("source") ? infoNode.get("source").asText() : null;
                 String mint = infoNode.has("mint") ? infoNode.get("mint").asText() : SystemProgram.PROGRAM_ID.toString();
+                String owner = infoNode.has("owner") ? infoNode.get("owner").asText() : null;
+                String newAccount = infoNode.has("newAccount") ? infoNode.get("newAccount").asText() : null;
+                String account = infoNode.has("account") ? infoNode.get("account").asText() : null;
+                String wallet = infoNode.has("wallet") ? infoNode.get("wallet").asText() : null;
                 TokenAmount tokenAmount = null;
-                if(parsedNode.has("tokenAmount")){
+                if (parsedNode.has("tokenAmount")) {
                     JsonNode tokenAmountNode = parsedNode.get("tokenAmount");
                     String tAmount = tokenAmountNode.has("amount") ? tokenAmountNode.get("amount").asText() : null;
                     int decimals = tokenAmountNode.has("decimals") ? tokenAmountNode.get("decimals").asInt() : 0;
                     double uiAmount = tokenAmountNode.has("uiAmount") ? tokenAmountNode.get("uiAmount").asDouble() : 0;
                     String uiAmountString = tokenAmountNode.has("uiAmountString") ? tokenAmountNode.get("uiAmountString").asText() : null;
-                    tokenAmount = new TokenAmount(tAmount,decimals,uiAmount,uiAmountString);
+                    tokenAmount = new TokenAmount(tAmount, decimals, uiAmount, uiAmountString);
                 }
-                info = new ParsedInstructionInfo(destination, lamports, amount, authority, source,mint,tokenAmount);
+                info = new ParsedInstructionInfo(destination, lamports, amount, authority, source, mint, tokenAmount,owner,newAccount,account,wallet);
             }
             String type = parsedNode.has("type") ? parsedNode.get("type").asText() : null;
             parsed = new ParsedInstructionData(info, type);

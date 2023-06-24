@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -20,5 +18,10 @@ public class ParsedInstructionInfo {
     private String source;
     private String mint;
     private TokenAmount tokenAmount;
+    private String owner;
+    private String newAccount;
+    private String account;
+    private String wallet;
+
 }
 
