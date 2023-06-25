@@ -447,4 +447,10 @@ public class SolanaRpcApi {
         return client.call("getSlot", params, Long.class);
     }
 
+    public PriorityFee getRecentPrioritizationFees() {
+        List<Object> params = new ArrayList<>();
+
+        return client.call("getSlot", params, PriorityFee.class);
+    }
+
 }
