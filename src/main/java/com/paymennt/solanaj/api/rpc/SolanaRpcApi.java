@@ -453,4 +453,8 @@ public class SolanaRpcApi {
         return client.call("getSlot", params, PriorityFee.class);
     }
 
+    public String getHealth() {
+        List<Object> params = new ArrayList<>();
+        return client.call("getHealth", params, String.class);
+    }
 }
