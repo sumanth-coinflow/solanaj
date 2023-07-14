@@ -5,6 +5,7 @@
 package com.paymennt.solanaj.block;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.paymennt.solanaj.api.rpc.types.RpcResultObject;
 import lombok.Data;
@@ -17,6 +18,8 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
 public class Block extends RpcResultObject {
+    @JsonIgnore
+    private Long slot;
     private Long blockHeight;
     private Instant blockTime;
     private String blockhash;
