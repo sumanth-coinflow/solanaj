@@ -220,6 +220,23 @@ public class SolanaRpcApi {
         return result;
     }
 
+    public List<SignatureInformation> getSignaturesForAddress(String address, String until, int limit) {
+        List<Object> params = new ArrayList<>();
+
+        params.add(address);
+        params.add(new SignaturesForAddress(limit, SolanaCommitment.confirmed, until));
+
+        List<AbstractMap> rawResult = client.call("getSignaturesForAddress", params, List.class);
+
+        List<SignatureInformation> result = new ArrayList<>();
+        for (AbstractMap item : rawResult) {
+            result.add(new SignatureInformation(item));
+        }
+
+        return result;
+    }
+
+
     /**
      * @param account
      * @param offset
