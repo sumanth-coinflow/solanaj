@@ -40,7 +40,7 @@ public class SignatureInformation {
         this.err = info.get("err");
         this.memo = info.get("memo");
         this.signature = (String) info.get("signature");
-        this.err = info.get("slot");
+        this.slot = (long) info.get("slot");
     }
 
     /**
