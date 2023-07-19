@@ -476,4 +476,13 @@ public class SolanaRpcApi {
         List<Object> params = new ArrayList<>();
         return client.call("getHealth", params, String.class);
     }
+
+    public Long getBlockHeight() {
+        List<Object> params = new ArrayList<>();
+
+        params.add(new RpcLogsConfig(SolanaCommitment.confirmed));
+
+        return client.call("getBlockHeight", params, Long.class);
+    }
+
 }
