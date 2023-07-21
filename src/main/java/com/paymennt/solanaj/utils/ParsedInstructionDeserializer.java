@@ -12,8 +12,10 @@ import com.paymennt.solanaj.program.SystemProgram;
 import com.paymennt.solanaj.program.TokenProgram;
 
 import java.io.IOException;
+import java.util.Set;
 
 public class ParsedInstructionDeserializer extends JsonDeserializer<ParsedInstruction> {
+    private final Set<String> supportedTypes = Set.of("transfer", "transfer_many", "transfer_checked", "initialize_account3");
 
     @Override
     public ParsedInstruction deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
@@ -31,7 +33,8 @@ public class ParsedInstructionDeserializer extends JsonDeserializer<ParsedInstru
         if (node.has("parsed")) {
             JsonNode parsedNode = node.get("parsed");
             ParsedInstructionInfo info = null;
-            if (parsedNode.has("info")) {
+            String type = parsedNode.has("type") ? parsedNode.get("type").asText() : null;
+            if (parsedNode.has("info") && supportedTypes.contains(type)) {
                 JsonNode infoNode = parsedNode.get("info");
                 String destination = infoNode.has("destination") ? infoNode.get("destination").asText() : null;
                 long lamports = infoNode.has("lamports") ? infoNode.get("lamports").asLong() : 0L;
@@ -52,9 +55,8 @@ public class ParsedInstructionDeserializer extends JsonDeserializer<ParsedInstru
                     String uiAmountString = tokenAmountNode.has("uiAmountString") ? tokenAmountNode.get("uiAmountString").asText() : null;
                     tokenAmount = new TokenAmount(tAmount, decimals, uiAmount, uiAmountString);
                 }
-                info = new ParsedInstructionInfo(destination, lamports, amount, authority, source, mint, tokenAmount,owner,newAccount,account,wallet);
+                info = new ParsedInstructionInfo(destination, lamports, amount, authority, source, mint, tokenAmount, owner, newAccount, account, wallet);
             }
-            String type = parsedNode.has("type") ? parsedNode.get("type").asText() : null;
             parsed = new ParsedInstructionData(info, type);
         }
 
