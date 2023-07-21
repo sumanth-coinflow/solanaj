@@ -34,7 +34,8 @@ public class ParsedInstructionDeserializer extends JsonDeserializer<ParsedInstru
             JsonNode parsedNode = node.get("parsed");
             ParsedInstructionInfo info = null;
             String type = parsedNode.has("type") ? parsedNode.get("type").asText() : null;
-            if (parsedNode.has("info") && supportedTypes.contains(type)) {
+            if(!supportedTypes.contains(type)) return null;
+            if (parsedNode.has("info")) {
                 JsonNode infoNode = parsedNode.get("info");
                 String destination = infoNode.has("destination") ? infoNode.get("destination").asText() : null;
                 long lamports = infoNode.has("lamports") ? infoNode.get("lamports").asLong() : 0L;
